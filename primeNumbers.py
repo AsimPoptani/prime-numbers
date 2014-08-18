@@ -1,6 +1,6 @@
 __author__ = 'Asim Poptani'
 __version__ = 1
-import threading
+import multiprocessing
 import sys
 
 def isPrime(number):
@@ -18,7 +18,8 @@ def isPrime(number):
             if (n1*n2==number):
                 multiplicationCount +=1
     if (multiplicationCount==2):
-        print(number)
+        f=open("prime.txt","a")
+        f.write(str(number)+",\n")
         return True
     else:
         return False
@@ -31,12 +32,11 @@ if __name__ == "__main__":
         raise Exception("Please Upgrade or Downgrade your python to python 3.")
     number=0
     while True:
-        threads=[]
-        for i in range(1):
+        processList=[]
+        for i in range(4):
             number+=1
-            thread=threading.Thread(target=isPrime,args=[number])
-            thread.start()
-            threads=[]
-            threads.append(thread)
-        for thread in threads:
-            thread.join()
+            process=multiprocessing.Process(target=isPrime,args=[number])
+            process.start()
+            processList.append(process)
+        for process in processList:
+            process.join()
