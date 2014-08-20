@@ -64,7 +64,7 @@ if __name__ == "__main__":
     amountProcess=int(input("How many Process would you like to give? \n"))
     #my main loop
     while True:
-        #a proccess list to kill them off
+        #a proccess list to kill them off !
         processList=[]
         for i in range(amountProcess):
             numberToCheck+=1
